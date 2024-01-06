@@ -10,6 +10,7 @@ function handleSubmit (event) {
   const weight = getInputNumberValue('weight');
   const height = getInputNumberValue('height');
   const activityLevel = getSelectedValue('activity_level');
+  const target = getSelectedValue('target');
 
   const tmb = Math.round(
     gender === 'female'
@@ -18,16 +19,34 @@ function handleSubmit (event) {
   );
 
   const maintenance = Math.round(tmb * Number(activityLevel));
-  const loseWeight = maintenance - 450;
-  const gainWeight = maintenance + 450;
+
+  const loseWeight = target === 'cutting' ? maintenance - 450 : maintenance + 450;
+
+  //const loseWeight = maintenance - 450;
+  //const gainWeight = maintenance + 450;
 
   const carbo = Math.round((loseWeight * 0.60) / 4);
   const protein = Math.round((loseWeight * 0.20) / 4);
   const gordura = Math.round((loseWeight * 0.20) / 9);
 
+  /*
+  console.log(gender)
+  console.log(age)
+  console.log(weight)
+  console.log(height)
+  console.log(activityLevel)
+  console.log(target)
+  console.log(tmb)
+  console.log(maintenance)
+  console.log(loseWeight)
+  console.log(carbo)
+  console.log(protein)
+  console.log(gordura)
+  */
+
   //resultados da cálculo para exibir na tela
   const layout = `
-    <h4>Perca de gordura: Macronutrientes por dia</h4>
+    <h4>Macronutrientes por dia</h4>
     <br>
     <div class="result-content">
       <ul>
